@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const mongodb = require("./src/database/DBConnect");
 const dotenv = require("dotenv");
 dotenv.config();
+require("colors");
 //Security Middleware import
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
