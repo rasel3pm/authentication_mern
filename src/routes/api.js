@@ -11,6 +11,6 @@ const router = express.Router();
 //manage user router
 router.post("/create-acc", createAccount);
 router.post("/login", loginAccount);
-router.get("/users", authentication, authorization, allUser);
+router.get("/users", allUser);
 
 module.exports = router;
