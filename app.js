@@ -14,7 +14,7 @@ const cors = require("cors");
 //req rate limit
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 20, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  max: 50, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
 });
 //Security Middleware implement
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,14 +28,14 @@ app.use(xss());
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
 mongodb();
 app.use("/api/v1", router);
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000"); // Replace with your frontend domain
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Replace with your frontend domain
   res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
 });

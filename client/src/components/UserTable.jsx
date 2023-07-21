@@ -1,4 +1,16 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 const UserTable = () => {
+  const [user, setUser] = useState([]);
+  const dataFetch = () => {
+    axios
+      .get("https://authentication-mern-beta.vercel.app/api/v1/users")
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => console.log("not found", err));
+  };
+  useEffect(() => dataFetch(), [user]);
   return (
     <div>
       <table class="table table-striped table-hover table-sm table-responsive shadow-sm">
@@ -13,22 +25,12 @@ const UserTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">22</th>
-            <td>Mark jukarbarg</td>
-            <td>Otto@gmail.com</td>
-            <td>01715972211</td>
-            <td>Manager</td>
-            <td>30000</td>
-          </tr>
-          <tr>
-            <th scope="row">22</th>
-            <td>Mark jukarbarg</td>
-            <td>Otto@gmail.com</td>
-            <td>01715972211</td>
-            <td>Manager</td>
-            <td>30000</td>
-          </tr>
+          {user.map((item) => (
+            <tr key={item.id}>
+              <td>{item.fName}</td>
+              <td>{item.email}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
